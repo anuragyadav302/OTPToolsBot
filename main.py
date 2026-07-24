@@ -8,7 +8,7 @@ from telegram.ext import (
 from telegram.error import TelegramError
 from telegram.request import HTTPXRequest
 from config import BOT_TOKEN
-
+from database import add_user, get_user_count
 
 CHANNEL_ID = "@DealNova_Official"
 CHANNEL_LINK = "https://t.me/DealNova_Official"
@@ -20,6 +20,8 @@ WEBSITE_LINK = "https://www.call-bomber.online/"
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+add_user(update.effective_user.id)
 
     keyboard = [
         [InlineKeyboardButton("📢 Join Channel", url=CHANNEL_LINK)],
