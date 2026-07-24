@@ -21,7 +21,7 @@ WEBSITE_LINK = "https://www.call-bomber.online/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-add_user(update.effective_user.id)
+    add_user(update.effective_user.id)
 
     keyboard = [
         [InlineKeyboardButton("📢 Join Channel", url=CHANNEL_LINK)],
@@ -102,6 +102,14 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "✅ Bot Online"
     )
 
+async def users(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+     count = get_user_count()
+
+     await update.message.reply_text(
+        f"👥 Total Users: {count}"
+    )
+
 
 def main():
 
@@ -127,7 +135,9 @@ def main():
     app.add_handler(
         CommandHandler("status", status)
     )
-
+    app.add_handler(
+        CommandHandler("users", users)
+    )
     app.add_handler(
         CallbackQueryHandler(verify)
     )
